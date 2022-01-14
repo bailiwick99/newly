@@ -2,10 +2,10 @@
 #
 # The following GitHub Secrets must be first defined:
 #   - CHECKMARX_URL
-#   - CHECKMARX_USER
+#   - CHECKMARX_USERNAME  
 #   - CHECKMARX_PASSWORD
 #   - CHECKMARX_CLIENT_SECRET
-#   - GH_TOKEN
+#   - GH_TOKEN # omitted for now
 #
 # Update the 'team' field to reflect the team name used in Checkmarx.
 #
