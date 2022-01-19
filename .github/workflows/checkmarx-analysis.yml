@@ -31,7 +31,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Checkmarx CxFlow Action
-      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.4
+      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.3
       with:
         project: ${{ github.repository }}-PR
         team: ${{ secrets.CHECKMARX_TEAMS }}
@@ -43,5 +43,4 @@ jobs:
         break_build: false
         scanners: sast
         bug_tracker: GITHUBPULL
-        java_opts: -Xmx2g
         params: --namespace=${{ github.repository_owner }}  --repo-name=${{ github.event.repository.name }} --branch=${{ github.head_ref }} --merge-id=${{ github.event.number }} --cx-flow.filterSeverity --cx-flow.filterCategory
