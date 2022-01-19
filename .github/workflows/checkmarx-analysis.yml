@@ -2,10 +2,10 @@
 #
 # The following GitHub Secrets must be first defined:
 #   - CHECKMARX_URL
-#   - CHECKMARX_USER
+#   - CHECKMARX_USERNAME
 #   - CHECKMARX_PASSWORD
 #   - CHECKMARX_CLIENT_SECRET
-#   - GH_TOKEN
+#   - GH_TOKEN # Not using this
 #
 # Update the 'team' field to reflect the team name used in Checkmarx.
 #
@@ -31,7 +31,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Checkmarx CxFlow Action
-      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.3
+      uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.4
       with:
         project: ${{ github.repository }}-PR
         team: ${{ secrets.CHECKMARX_TEAMS }}
@@ -39,8 +39,9 @@ jobs:
         checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}  # To be stored in GitHub Secrets.
         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}  # To be stored in GitHub Secrets.
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}  # To be stored in GitHub Secrets.
-        incremental: true
+        incremental: false
         break_build: false
         scanners: sast
+        java_opts: -Xmx2g
         bug_tracker: GITHUBPULL
-        params: --namespace=${{ github.repository_owner }}  --repo-name=${{ github.event.repository.name }} --branch=${{ github.head_ref }} --merge-id=${{ github.event.number }} --cx-flow.filterSeverity --cx-flow.filterCategory
+        params: --namespace=${{ github.repository_owner }}  --repo-name=${{ github.event.repository.name }} --branch=${{ github.head_ref }} --merge-id=${{ github.event.number }} --cx-flow.filterSeverity --cx-flow.filterCategory --cx-flow.zip-exclude="\.git\/.*,target/.*"
