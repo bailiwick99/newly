@@ -5,7 +5,7 @@
 #   - CHECKMARX_USER
 #   - CHECKMARX_PASSWORD
 #   - CHECKMARX_CLIENT_SECRET
-#   - GH_TOKEN
+#   - GH_TOKEN # this time, we set GH_TOKEN
 #
 # Update the 'team' field to reflect the team name used in Checkmarx.
 #
@@ -39,8 +39,9 @@ jobs:
         checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}  # To be stored in GitHub Secrets.
         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}  # To be stored in GitHub Secrets.
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}  # To be stored in GitHub Secrets.
-        incremental: true
+        incremental: false
         break_build: false
         scanners: sast
         bug_tracker: GITHUBPULL
+        java_opts: -Xmx2g
         params: --namespace=${{ github.repository_owner }}  --repo-name=${{ github.event.repository.name }} --branch=${{ github.head_ref }} --merge-id=${{ github.event.number }} --cx-flow.filterSeverity --cx-flow.filterCategory
