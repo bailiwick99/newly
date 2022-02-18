@@ -12,7 +12,6 @@
 # For full documentation,including a list of all inputs, please refer to the README https://github.com/checkmarx-ts/checkmarx-cxflow-github-action
 
 name: CxFlow-GitHub-Pull-Request
-runs-on
 
 # Controls when the action will run. Triggers the workflow on push or pull request events but only for the master branch
 on:
@@ -27,7 +26,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on - Ubuntu is required as Docker is leveraged for the action
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
