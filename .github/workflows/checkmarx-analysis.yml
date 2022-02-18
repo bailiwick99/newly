@@ -12,6 +12,7 @@
 # For full documentation,including a list of all inputs, please refer to the README https://github.com/checkmarx-ts/checkmarx-cxflow-github-action
 
 name: CxFlow-GitHub-Pull-Request
+runs-on
 
 # Controls when the action will run. Triggers the workflow on push or pull request events but only for the master branch
 on:
@@ -30,6 +31,10 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    - name: file checker
+      run : |
+        pwd
+        find . -type f | grep -i -E -o "\.\w*$" | sort | uniq -c
     - name: Checkmarx CxFlow Action
       uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.3
       with:
@@ -43,4 +48,5 @@ jobs:
         break_build: false
         scanners: sast
         bug_tracker: GITHUBPULL
-        params: --namespace=${{ github.repository_owner }}  --repo-name=${{ github.event.repository.name }} --branch=${{ github.head_ref }} --merge-id=${{ github.event.number }} --cx-flow.filterSeverity --cx-flow.filterCategory
+        params: --namespace=${{ github.repository_owner }}  --repo-name=${{ github.event.repository.name }} --branch=${{ github.head_ref }} --merge-id=${{ github.event.number }} --cx-flow.filterSeverity --cx-flow.filterCategory --logging.level.com.checkmarx.flow.custom=debug --logging.level.com.checkmarx.flow.service=debug --logging.level.com.checkmarx.flow.utils=debug --logging.level.com.checkmarx.sdk.service=debug
+
