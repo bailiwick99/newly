@@ -3,10 +3,6 @@ name: Run Checkmarx
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-  repository_dispatch:
-    types: [run-test-command]
-
-
 
 jobs:
   test:
