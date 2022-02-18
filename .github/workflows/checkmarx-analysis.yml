@@ -12,7 +12,6 @@
 # For full documentation,including a list of all inputs, please refer to the README https://github.com/checkmarx-ts/checkmarx-cxflow-github-action
 
 name: CxFlow-GitHub-Pull-Request
-runs-on
 
 # Controls when the action will run. Triggers the workflow on push or pull request events but only for the master branch
 on:
@@ -21,6 +20,7 @@ on:
     branches:
     - master
     - main
+  runs-on: self-hosted
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel - this job is specifically configured to use the Checkmarx CxFlow Action
 jobs:
